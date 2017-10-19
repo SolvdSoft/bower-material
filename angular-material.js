@@ -25316,6 +25316,7 @@ function MdAutocompleteCtrl ($scope, $element, $mdUtil, $mdConstant, $mdTheming,
       elements             = null,
       cache                = {},
       noBlur               = false,
+      blurValue            = null,
       selectedItemWatchers = [],
       hasFocus             = false,
       fetchesInProgress    = 0,
@@ -25798,6 +25799,19 @@ function MdAutocompleteCtrl ($scope, $element, $mdUtil, $mdConstant, $mdTheming,
 
     if (!noBlur) {
       ctrl.hidden = shouldHide();
+
+      if (!$scope.searchText) {
+        blurValue = null;
+      } else {
+        if (!$scope.selectedItem) {
+          if (blurValue) {
+            $scope.selectedItem = blurValue;
+          } else {
+            $scope.searchText = '';
+          }
+        }
+      }
+
       evalAttr('ngBlur', { $event: $event });
     }
   }
@@ -26073,6 +26087,7 @@ function MdAutocompleteCtrl ($scope, $element, $mdUtil, $mdConstant, $mdTheming,
         ngModel.$render();
       }).finally(function () {
         $scope.selectedItem = ctrl.matches[ index ];
+        blurValue = $scope.selectedItem;
         setLoading(false);
       });
     }, false);
