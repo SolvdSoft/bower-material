@@ -25410,7 +25410,7 @@ function MdAutocompleteCtrl ($scope, $element, $mdUtil, $mdConstant, $mdTheming,
       return $mdUtil.nextTick(positionDropdown, false, $scope);
     }
 
-    var dropdownHeight = ($scope.dropdownItems || MAX_ITEMS) * ITEM_HEIGHT;
+    var dropdownHeight = Math.max(1, Math.min((ctrl.matches.length), ($scope.dropdownItems || MAX_ITEMS))) * ITEM_HEIGHT;
 
     var hrect  = elements.wrap.getBoundingClientRect(),
         vrect  = elements.snap.getBoundingClientRect(),
