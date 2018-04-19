@@ -27280,7 +27280,8 @@ function MdChip($mdTheming, $mdUtil, $compile, $timeout) {
       }
 
       if (chipsController.shouldFocusLastChip) {
-        chipsController.focusLastChipThenInput();
+        // Disable this behavior entirely
+        //chipsController.focusLastChipThenInput();
       }
     });
   }
