@@ -32915,8 +32915,10 @@ function MenuController($mdMenu, $attrs, $element, $scope, $mdUtil, $timeout, $r
         nestedMenu && nestedMenu.open();
       }
     }, nestedMenu ? 100 : 250);
-    var focusableTarget = event.currentTarget.querySelector('.md-button:not([disabled])');
-    focusableTarget && focusableTarget.focus();
+    if (!('disableHoverFocus' in $attrs)) {
+      var focusableTarget = event.currentTarget.querySelector('.md-button:not([disabled])');
+      focusableTarget && focusableTarget.focus();
+    }
   };
 
   this.handleMenuItemMouseLeave = function() {
